@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Student Portal
 
-## Getting Started
+## BACKGROUND 
+Student Portal is a web application which provide web based student activity management system for all college/school students in order to introduce more reliability and transparency in information exchange activities e.g. exam notification, gate pass details and many more.  This application will be implemented as MEAN/Full Stack application followed by MVC architecture. This will be a RESTful web service.
 
-First, run the development server:
+## BUSINESS CONTEXT
+The objective is to develop a RESTful web application that can be easily adopted by customer (student/college/school) to make the educational processes/activities faster, safer and maintainable. The framework should be built in a way that ensures lower maintenance efforts and maximum re-usability.Server and client apps will be individually deployed on Heroku cloud and communicates between them will be established through REST API call over HTTP protocol.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## USE CASES
+The Application is designed to provide user specific functionality. There will be two users of this application: 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Admin
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Can enrol the students with a unique registration number
+- Can send email to all the students with their registration numbers to register on the portal using it.
+- Can post/publish any notification/ exam time table/ change in faculty/ exam gate pass/ circular on the portal.- Can block the account of any student 
+- Can approve or reject the leave applied by student.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Student
 
-## Learn More
+- Can change or reset their password.
+- Can register themselves using registration number provided by admin
+- Can change or reset their password.
+- Can apply for the leave.
+- Can update their profile details•Can download exam time table/exam gate pass
 
-To learn more about Next.js, take a look at the following resources:
+## PROCESS FLOW
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Application Deployment
+The code for the client and the server app will be maintained in the git repository. For each small functionality, a new pull request will be opened and once that pull request is merged to the master repository, latest code will be automatically deployed to the cloud. The Automatic deployment from git will be configured. The URL of the application will be shared, once the development being finished.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Application Testing
+When the application will be hosted on the cloud with all functionality,a basic testing will be carried out by postman to check each functionality. Postman will be used for this testing,specially the CRUD operations.
 
-## Deploy on Vercel
+## TARGET ENVIRONMENT
+The installation of the tools required to work on the capstone project is already covered in the courses that are part of this masters program. Install these tools and solve the project problem.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## TASKS
+Following are the tasks, which need to be developed while executing the project:
+1.Client and Server end code through git repository.
+2.MongoDB free account credentials.
+3.Heroku based application URLto be used. 
+4.Functionality document with screenshot. (This will be optional)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
