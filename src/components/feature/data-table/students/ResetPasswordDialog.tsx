@@ -43,7 +43,7 @@ export default function ResetPasswordDialog(
       await resetPassword(
         ResetPasswordFormSchema.validateSync(values)
       ).unwrap();
-      toast.success(`Password reset successful`);
+      toast.success(`Password (re)set successful`);
       formik.setSubmitting(false);
       props.onOpenChange?.(false);
     } catch (err) {

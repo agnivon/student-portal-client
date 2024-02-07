@@ -1,20 +1,12 @@
-import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
 import "@/app/globals.css";
-import { cn } from "@/lib/utils";
-import Navbar from "../feature/Navbar";
 import AppProvider from "@/context/AppProvider";
-import { ScrollArea } from "../ui/scroll-area";
+import { cn } from "@/lib/utils";
+import { Inter as FontSans } from "next/font/google";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 });
-
-export const metadata: Metadata = {
-  title: "Student Portal",
-  description: "Student Portal",
-};
 
 export default function RootLayout({
   children,
