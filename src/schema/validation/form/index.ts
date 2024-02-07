@@ -69,7 +69,6 @@ export const AddStudentFormSchema = Yup.object().shape({
 });
 
 export const ResetPasswordFormSchema = Yup.object().shape({
-  user_id: Yup.string().required(),
   password: RegisterFormSchema.fields.password,
   confirm: RegisterFormSchema.fields.confirm,
 });

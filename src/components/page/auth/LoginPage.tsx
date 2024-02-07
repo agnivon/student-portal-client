@@ -2,8 +2,8 @@
 
 import BrandLogo from "@/components/feature/BrandLogo";
 import ErrorMessage from "@/components/formik/ErrorMessage";
+import FormikInput from "@/components/formik/FormikInput";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Routes } from "@/constants/routes.constants";
 import { cn, errorToast } from "@/lib/utils";
@@ -89,31 +89,31 @@ function PageComponent() {
                       <div className="grid w-full items-start gap-4 sm:w-[350px]">
                         <div className="flex flex-col space-y-1.5">
                           <Label htmlFor="email">Email</Label>
-                          <Input
+                          <FormikInput
                             id="email"
                             name="username"
                             placeholder="Email"
-                            value={formik.values.username}
-                            onChange={formik.handleChange}
+                            // value={formik.values.username}
+                            // onChange={formik.handleChange}
                           />
                           <ErrorMessage name="username" />
                         </div>
                         <div className="flex flex-col space-y-1.5">
                           <Label htmlFor="password">Password</Label>
-                          <Input
+                          <FormikInput
                             id="password"
                             name="password"
                             type="password"
                             placeholder="Password"
-                            value={formik.values.password}
-                            onChange={formik.handleChange}
+                            // value={formik.values.password}
+                            // onChange={formik.handleChange}
                           />
                           <ErrorMessage name="password" />
                         </div>
                         <Button
-                          type="button"
+                          type="submit"
                           className="w-full"
-                          onClick={() => formik.submitForm()}
+                          //onClick={() => formik.submitForm()}
                           disabled={formik.isSubmitting}
                         >
                           Login

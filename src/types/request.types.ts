@@ -27,6 +27,8 @@ export type CreateAnnouncementPayload = InferType<
 
 export type ApplyLeavePayload = InferType<typeof ApplyLeaveFormSchema>;
 
-export type ResetPasswordPayload = InferType<typeof ResetPasswordFormSchema>;
+export type ResetPasswordPayload = InferType<typeof ResetPasswordFormSchema> & {
+  user_id: string;
+};
 
 export type ForgotPasswordPayload = InferType<typeof ForgotPasswordFormSchema>;

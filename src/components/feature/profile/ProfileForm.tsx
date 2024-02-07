@@ -23,7 +23,7 @@ import React from "react";
 import { toast } from "sonner";
 
 export default function ProfileForm() {
-  const { user } = useUser() as { user: User };
+  const { user, isAdmin } = useUser() as { user: User, isAdmin: boolean };
 
   const [updateProfile] = useUpdateProfileMutation();
   const [changeProfileImage, profileImageMutation] =
@@ -37,7 +37,6 @@ export default function ProfileForm() {
     first_name: user?.first_name || "",
     last_name: user?.last_name || "",
     username: user?.username || "",
-    email: user.email,
     phone: user?.phone || "",
   };
 
@@ -49,8 +48,7 @@ export default function ProfileForm() {
     try {
       formik.setSubmitting(true);
       toastId = toast.loading("Updating profile");
-      const { email, ...payload } = values;
-      await updateProfile(payload).unwrap();
+      await updateProfile(values).unwrap();
       toast.success("Profile updated", { id: toastId });
       formik.setSubmitting(false);
     } catch (err) {
@@ -135,13 +133,21 @@ export default function ProfileForm() {
                   <ErrorMessage name="phone" />
                 </div>
                 <div className="flex flex-col gap-y-1.5">
-                  <Label htmlFor="username">Email</Label>
+                  <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
                     name="email"
-                    placeholder="Email"
-                    value={formik.values.email}
-                    readOnly={true}
+                    value={user.email}
+                    disabled={true}
+                  />
+                </div>
+                <div className="flex flex-col gap-y-1.5">
+                  <Label htmlFor="role">Role</Label>
+                  <Input
+                    id="role"
+                    name="role"
+                    value={isAdmin ? "Admin" : "Student"}
+                    disabled={true}
                   />
                 </div>
               </div>

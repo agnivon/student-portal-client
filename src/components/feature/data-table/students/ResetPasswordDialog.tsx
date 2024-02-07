@@ -31,21 +31,27 @@ export default function ResetPasswordDialog(
   const initialValues = {
     password: "",
     confirm: "",
-    user_id: props.row?.original._id,
   };
+
+  const user_id = props.row?.original._id;
 
   const handleSubmit = async (
     values: typeof initialValues,
     formik: FormikHelpers<typeof initialValues>
   ) => {
     try {
-      formik.setSubmitting(true);
-      await resetPassword(
-        ResetPasswordFormSchema.validateSync(values)
-      ).unwrap();
-      toast.success(`Password (re)set successful`);
-      formik.setSubmitting(false);
-      props.onOpenChange?.(false);
+      if (user_id) {
+        formik.setSubmitting(true);
+        await resetPassword({
+          ...values,
+          user_id,
+        }).unwrap();
+        toast.success(`Password (re)set successful`);
+        formik.setSubmitting(false);
+        props.onOpenChange?.(false);
+      } else {
+        toast.error("User ID not available");
+      }
     } catch (err) {
       errorToast(err);
     }

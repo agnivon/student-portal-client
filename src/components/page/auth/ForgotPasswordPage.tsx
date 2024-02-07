@@ -6,6 +6,7 @@ import RenderIf from "@/components/global/RenderIf";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
 import { Routes } from "@/constants/routes.constants";
 import { cn, errorToast } from "@/lib/utils";
 import {
@@ -141,6 +142,7 @@ function PageComponent() {
                             />
                             <ErrorMessage name="verification_code" />
                           </div>
+                          <Separator />
                           <div className="flex flex-col space-y-1.5">
                             <Label htmlFor="password">Password</Label>
                             <Input
@@ -173,7 +175,7 @@ function PageComponent() {
                           disabled={formik.isSubmitting}
                         >
                           {stage === "email"
-                            ? "Send Verification Email"
+                            ? "Send Verification Code"
                             : "Reset Password"}
                         </Button>
                       </div>
