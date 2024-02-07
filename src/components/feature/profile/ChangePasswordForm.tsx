@@ -4,6 +4,7 @@ import ErrorMessage from "@/components/formik/ErrorMessage";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { errorToast } from "@/lib/utils";
 import { useChangePasswordMutation } from "@/redux/toolkit/query/services/student.portal";
 import { ChangePasswordFormSchema } from "@/schema/validation/form";
 import { Form, Formik, FormikHelpers } from "formik";
@@ -30,7 +31,7 @@ export default function ChangePasswordForm() {
       toast.success("Password updated", { id: toastId });
       formik.setSubmitting(false);
     } catch (err) {
-      toast.error((err as { data: string })?.data, { id: toastId });
+      errorToast(err, toastId);
     }
   };
 

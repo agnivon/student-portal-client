@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 import { type ClassValue, clsx } from "clsx";
 import { toast } from "sonner";
 import { twMerge } from "tailwind-merge";
-import { ValidationError } from "yup";
+import { ValidationError, object } from "yup";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -24,7 +24,15 @@ export function errorToast(err: unknown, toastId?: string | number) {
     });
   } else {
     const error = err as AxiosError;
-    toast.error((error.response?.data as string) || error.message, {
+    const data = error.response?.data;
+    console.log(data);
+    const message =
+      typeof data === "string"
+        ? data
+        : typeof data === "object"
+        ? JSON.stringify(data)
+        : "";
+    toast.error(message || error.message, {
       id: toastId,
     });
   }

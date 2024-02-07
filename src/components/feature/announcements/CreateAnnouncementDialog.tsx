@@ -60,9 +60,12 @@ export default function CreateAnnouncementDialog(
     try {
       //toastId = toast.loading("Uploading file...");
       const files = e.target.files;
-
       if (files) {
-        const attachments = (
+        if (files.length + attachments.length > 5) {
+          toast.error("Maximum 5 attachments allowed");
+          return;
+        }
+        const uploadedAttachments = (
           await Promise.all(
             Array.from(files).map(async (file) => {
               let toastId;
@@ -71,7 +74,7 @@ export default function CreateAnnouncementDialog(
                 const formData = new FormData();
                 formData.set("file", file);
                 const attachment = await uploadFile(formData).unwrap();
-                toast.success(`${file.name} uploaded`, { id: toastId });
+                toast.success(`${attachment.name} uploaded`, { id: toastId });
                 return attachment;
               } catch (err) {
                 errorToast(err, toastId);
@@ -80,10 +83,12 @@ export default function CreateAnnouncementDialog(
             })
           )
         ).filter(Boolean) as IFile[];
-        setAttachments((a) => a.concat(attachments));
+        setAttachments((a) => a.concat(uploadedAttachments));
         formik.setFieldValue(
           "attachments",
-          formik.values.attachments.concat(attachments.map((a) => a._id))
+          formik.values.attachments.concat(
+            uploadedAttachments.map((a) => a._id)
+          )
         );
       } else {
         toast.error("File selection failed");
@@ -183,7 +188,7 @@ export default function CreateAnnouncementDialog(
                     <Textarea
                       id="content"
                       name="content"
-                      rows={10}
+                      rows={8}
                       placeholder="Type content here"
                       value={formik.values.content}
                       onChange={formik.handleChange}

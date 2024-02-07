@@ -15,7 +15,7 @@ export default function AppProvider({
   return (
     <>
       <TooltipProvider>
-        <Toaster closeButton />
+        <Toaster closeButton expand visibleToasts={5} />
         <Provider store={store}>
           <PersistGate
             loading={<Loading className="h-screen w-screen" />}
