@@ -8,6 +8,8 @@ import {
 import { StudentRecord } from "@/types/data.table.types";
 import { Row } from "@tanstack/react-table";
 import { toast } from "sonner";
+import { AdminStudentTableContext } from "./AdminStudentTableContext";
+import React from "react";
 
 export default function AdminStudentTableRowActions({
   row,
@@ -17,6 +19,8 @@ export default function AdminStudentTableRowActions({
   const isActive = row.getValue("status") == "true";
 
   const [changeStatus] = useChangeUserStatusMutation();
+
+  const adminStudentTableContext = React.useContext(AdminStudentTableContext);
 
   const handleChangeStatus = async (id: string, is_active: boolean) => {
     try {
@@ -52,6 +56,16 @@ export default function AdminStudentTableRowActions({
         variant={isActive ? "destructive" : "outline"}
       >
         {isActive ? "Block" : "Activate"}
+      </Button>
+      <Button
+        size={"sm"}
+        className="h-8"
+        onClick={() =>
+          adminStudentTableContext?.setShowResetPasswordDialog(row)
+        }
+        variant={"secondary"}
+      >
+        {`(Re)set Password`}
       </Button>
     </div>
   );

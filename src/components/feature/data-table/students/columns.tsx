@@ -22,7 +22,7 @@ export const adminStudentTableColumns = [
       <DataTableColumnHeader column={column} title="Full Name" />
     ),
   }),
-  columnHelper.accessor((row) => row.username, {
+  columnHelper.accessor((row) => row.username || "--", {
     id: "username",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Username" />
@@ -35,7 +35,7 @@ export const adminStudentTableColumns = [
       <DataTableColumnHeader column={column} title="Email" />
     ),
   }),
-  columnHelper.accessor((row) => row.phone, {
+  columnHelper.accessor((row) => row.phone || "--", {
     id: "phone",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Phone" />

@@ -15,5 +15,5 @@ export default function LogoutPage() {
       .catch((err) =>
         toast.error((err as { data: string })?.data, { id: toastId })
       );
-  }, []);
+  }, [logout]);
 }

@@ -7,6 +7,7 @@ import {
   RegisterFormSchema,
   ApplyLeaveFormSchema,
   ForgotPasswordFormSchema,
+  ResetPasswordFormSchema,
 } from "@/schema/validation/form";
 import { InferType } from "yup";
 
@@ -25,5 +26,7 @@ export type CreateAnnouncementPayload = InferType<
 >;
 
 export type ApplyLeavePayload = InferType<typeof ApplyLeaveFormSchema>;
+
+export type ResetPasswordPayload = InferType<typeof ResetPasswordFormSchema>;
 
 export type ForgotPasswordPayload = InferType<typeof ForgotPasswordFormSchema>;

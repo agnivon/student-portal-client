@@ -17,7 +17,7 @@ export default function NavLayout({
 
   React.useEffect(() => {
     if (user) router.push(Routes.ANNOUNCEMENTS);
-  }, [user]);
+  }, [user, router]);
 
   return (
     <>

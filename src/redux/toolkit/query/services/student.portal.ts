@@ -16,6 +16,7 @@ import {
   ForgotPasswordPayload,
   LoginPayload,
   RegisterPayload,
+  ResetPasswordPayload,
   UpdateUserProfilePayload,
 } from "@/types/request.types";
 import { User } from "@/types/user.types";
@@ -71,6 +72,13 @@ export const studentPortalApi = createApi({
       query: (payload) => ({
         url: `/user/send-verification-code`,
         method: "post",
+        data: payload,
+      }),
+    }),
+    resetPassword: builder.mutation<undefined, ResetPasswordPayload>({
+      query: (payload) => ({
+        url: `/user/reset-password`,
+        method: "put",
         data: payload,
       }),
     }),
@@ -226,6 +234,7 @@ export const {
   useChangeProfileImageMutation,
   useChangePasswordMutation,
   useSendVerificationCodeMutation,
+  useResetPasswordMutation,
   useForgotPasswordMutation,
   useGetMyLeavesQuery,
   useGetAllLeavesQuery,

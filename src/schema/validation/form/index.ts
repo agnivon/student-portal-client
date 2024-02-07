@@ -2,7 +2,9 @@ import { Content } from "next/font/google";
 import * as Yup from "yup";
 
 export const LoginFormSchema = Yup.object().shape({
-  username: Yup.string().required("Username is required"),
+  username: Yup.string()
+    .required("Username is required")
+    .email("Invalid email"),
   password: Yup.string().required("Password is required"),
 });
 
@@ -53,7 +55,23 @@ export const AddStudentFormSchema = Yup.object().shape({
   last_name: Yup.string()
     .required("Last Name is required")
     .max(64, "A maximum of 64 characters is allowed"),
-  email: Yup.string().required("Email is required").email("Invalid email"),
+  email: Yup.string()
+    .required("Email is required")
+    .email("Invalid email")
+    .test(
+      "unique-email",
+      "This email already exists. Email must be unique",
+      function (value) {
+        const existing_emails = this.parent.existing_emails || [];
+        return !existing_emails.includes(value);
+      }
+    ),
+});
+
+export const ResetPasswordFormSchema = Yup.object().shape({
+  user_id: Yup.string().required(),
+  password: RegisterFormSchema.fields.password,
+  confirm: RegisterFormSchema.fields.confirm,
 });
 
 export const CreateAnnouncementFormSchema = Yup.object().shape({

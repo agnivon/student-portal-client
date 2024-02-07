@@ -11,14 +11,17 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAppDispatch } from "@/hooks/redux";
+import { errorToast } from "@/lib/utils";
 import {
   studentPortalApi,
   useCreateUserMutation,
+  useGetMyStudentsQuery,
 } from "@/redux/toolkit/query/services/student.portal";
 import { AddStudentFormSchema } from "@/schema/validation/form";
 
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Form, Formik, FormikHelpers } from "formik";
+import React from "react";
 import { toast } from "sonner";
 
 export function AddStudentDialog(
@@ -27,10 +30,18 @@ export function AddStudentDialog(
   const [createUser] = useCreateUserMutation();
   const dispatch = useAppDispatch();
 
+  const { data: students } = useGetMyStudentsQuery(undefined);
+
+  const studentEmails = React.useMemo(
+    () => students?.map((s) => s.email) || [],
+    [students]
+  );
+
   const initialValues = {
     email: "",
     first_name: "",
     last_name: "",
+    existing_emails: studentEmails,
   };
 
   const handleSubmit = async (
@@ -39,7 +50,8 @@ export function AddStudentDialog(
   ) => {
     try {
       formik.setSubmitting(true);
-      const user = await createUser(values).unwrap();
+      const { existing_emails, ...payload } = values;
+      const user = await createUser(payload).unwrap();
       if (user) {
         dispatch(
           studentPortalApi.util.updateQueryData(
@@ -55,7 +67,7 @@ export function AddStudentDialog(
       formik.setSubmitting(false);
       props.onOpenChange?.(false);
     } catch (err) {
-      toast.error((err as { data: string })?.data);
+      errorToast(err);
     }
   };
 

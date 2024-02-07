@@ -61,7 +61,7 @@ export const adminLeaveTableColumns = [
       },
     }
   ),
-  columnHelper.accessor((row) => row.reason, {
+  columnHelper.accessor((row) => row.reason || "--", {
     id: "reason",
     header: "Reason",
     cell: ({ row }) => (

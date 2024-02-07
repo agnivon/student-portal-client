@@ -42,7 +42,7 @@ export default function AuthLayout({
         router.push(Routes.LOGIN);
       }
     }
-  }, [isFetching, isSuccess, isError, user, dispatch, authenticated]);
+  }, [isFetching, isSuccess, isError, user, dispatch, authenticated, router]);
 
   return isLoading ? (
     <Loading className="flex-grow" />
